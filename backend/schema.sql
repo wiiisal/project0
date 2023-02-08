@@ -1,0 +1,32 @@
+DROP DATABASE IF EXISTS project;
+CREATE DATABASE IF NOT EXISTS project;
+USE project;
+
+CREATE TABLE IF NOT EXISTS videos(
+    id INT AUTO_INCREMENT ,
+    name varchar(50) NOT NULL,
+    duration varchar(50) NOT NULL,
+    poster varchar(255) NOT NULL,
+    PRIMARY KEY(id)
+);
+CREATE TABLE IF NOT EXISTS user(
+    id INT AUTO_INCREMENT,
+    user_Name VARCHAR(250) NOT NULL,
+    email VARCHAR(250) NOT NULL,
+    phone_Number VARCHAR(250) NOT NULL,
+    password VARCHAR(250) NOT NULL,
+    confirm_password VARCHAR(250) NOT NULL,
+    created_At TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    updated_At TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() ON UPDATE CURRENT_TIMESTAMP(),
+    photo VARCHAR(250) NOT NULL,
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE IF NOT EXISTS sessions(
+    id INT AUTO_INCREMENT,
+    session VARCHAR(250) NOT NULL,
+    logedIn_At TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    user_id INT NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY (user_id) REFERENCES user(id)
+);
