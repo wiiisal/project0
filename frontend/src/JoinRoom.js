@@ -12,13 +12,13 @@ function JoinRoom() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const response = await fetch(`${"https://prod-in2.100ms.live/hmsapi/tunisiastream.app.100ms.live/"}api/token`, {
+    const response = await fetch(`${"(add your api token)"}api/token`, {
       method: "POST",
       body: JSON.stringify({
         user_id: `${Date.now()}`,
         role: selectedRole, //broadcaster, hls-viewer
         type: "app",
-        room_id: '63fde1f0da7e7ca812840e16',
+        room_id: '(add your secret)',
       }),
     })
     const { token } = await response.json()
