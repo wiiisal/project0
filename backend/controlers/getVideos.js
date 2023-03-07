@@ -1,4 +1,4 @@
-const connection = require ('../configurationDatabase/config')
+const {connection} = require ('../configurationDatabase/config')
 
 module.exports={
     getvideos:((req,res)=>{
