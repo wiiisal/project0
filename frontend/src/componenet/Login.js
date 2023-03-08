@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import axios, { Axios } from 'axios'
 export default function Login() {
     const[isLogin,setIsLogin]=useState(false)
     const [user_Name,setUsername]=useState(null)
@@ -7,6 +7,7 @@ export default function Login() {
     const[confirm_password,setConfirm_password]=useState(null)
     const [error,setError]=useState(false)
     const [isClicked, setIsClicked] = useState(null);
+   
    
     const handleSubmit = async()=>{
         if(isClicked === false) {
@@ -21,6 +22,9 @@ export default function Login() {
             user_Name,password
         }).then(res => {
           if (res.data.loggedIn) {
+            Axios.defaults.withCredentials = true;
+            localStorage.setItem("loggedIn", true);
+            localStorage.setItem("username", res.data.username);
             window.location.href = '/home'
           }
         })

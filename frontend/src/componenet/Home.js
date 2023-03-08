@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactPlayer from 'react-player'
 import { useHMSStore, selectIsConnectedToRoom } from '@100mslive/react-sdk';
 import JoinRoom from '../JoinRoom'
@@ -12,7 +12,7 @@ import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
 
  export default function Home() {
 
-    const [value, setValue] = React.useState('recents');
+    const [value, setValue] = useState('recents');
     const [theme, setTheme] = useState('light');
   const toggleTheme = () => {
     if (theme === 'light') {
@@ -25,6 +25,11 @@ import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  useEffect(() => {
+    if (!localStorage.getItem("loggedIn")) {
+      localStorage.setItem("loggedIn", false);
+    }
+  }, []);
             // const response =  fetch('http://localhost:3002/api/getvideos');
             // const data =  response.json();
             // this.setState({ videos: [...data] });
@@ -55,7 +60,7 @@ import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
       />
       <BottomNavigationAction label="Logout" value="logout" icon={<PowerSettingsNewIcon color='secondary'/>} />
     </BottomNavigation>
-                    <div className="row">
+                    {/* <div className="row">
                     <ReactPlayer className='video'  url={[ 'https://youtu.be/1fx--d0ErNk' ]}
                          playing
                          muted
@@ -69,7 +74,7 @@ import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew';
                          onStart
                          onPlay
                          onDuration  />
-                    </div>
+                    </div> */}
                     <div>
                     {isConnected ? <Room />: <JoinRoom />}
                     </div>
